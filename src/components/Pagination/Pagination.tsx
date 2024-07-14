@@ -1,8 +1,8 @@
 type PaginationProps = {
   gotoNextPage: () => void;
   gotoPrevPage: () => void;
-  prevPage?: string;
-  nextPage?: string;
+  prevPage?: string | null;
+  nextPage?: string | null;
 };
 
 export const Pagination = ({
