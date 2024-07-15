@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import PokemonCard from "./PokemonCard/PokemonCard";
+import PokemonListPageCard from "./PokemonListPageCard/PokemonListPageCard";
 import type {
   PokeAPI_InfoPage,
   PokeAPI_Pokemon_Type,
   PokeAPI_Pokemon_Stat,
   PokeAPI_ResultPage,
-} from "../../types/PokeAPI_DataTypes";
-import { Pagination } from "../Pagination/Pagination";
+  PokeAPI_PokemonData,
+} from "../../../types/PokeAPI_DataTypes";
+import { Pagination } from "../../Pagination/Pagination";
+import { PokemonListPageButton } from "../../../atoms/Buttons";
 
 type PokemonData = {
   imageURL: string;
@@ -34,6 +36,7 @@ export default function PokemonListPage() {
   const [prevPageURL, setPrevPageURL] = useState<string>("");
 
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchPokemonData = async () => {
     // Get the list of all pokemons, limit per request is 20 by default
@@ -55,19 +58,20 @@ export default function PokemonListPage() {
 
             // Get the desired data for each pokemon, and store in the temp variables above
             await axios
-              .get(result.url, { timeout: 2 * 100 /*0.2 sec timeout*/ })
+              .get(result.url, { timeout: 2 * 1000 /*0.2 sec timeout*/ })
               .then((res) => {
-                let pokemonInfo = res.data;
+                let pokemonInfo: PokeAPI_PokemonData = res.data;
+
                 // Set image URL
-                imageURL = pokemonInfo.sprites.front_default;
+                imageURL = pokemonInfo.sprites!.front_default as string;
                 // Set the name
-                name = pokemonInfo.name;
+                name = pokemonInfo!.name as string;
                 // Set the elements
-                pokemonInfo.types.map((type: PokeAPI_Pokemon_Type) =>
+                pokemonInfo.types!.map((type: PokeAPI_Pokemon_Type) =>
                   elements.push(type.type.name)
                 );
                 // Set the stats
-                pokemonInfo.stats.map((stat: PokeAPI_Pokemon_Stat) =>
+                pokemonInfo.stats!.map((stat: PokeAPI_Pokemon_Stat) =>
                   stats.push(stat.base_stat)
                 );
               })
@@ -96,6 +100,7 @@ export default function PokemonListPage() {
 
             // Set the list of pokemons
             setPokemonList([...pokemonList, (pokemonList[index] = pokemon)]);
+            setIsLoading(false);
           }
         );
       })
@@ -120,23 +125,24 @@ export default function PokemonListPage() {
     fetchPokemonData();
   }, [currentPageURL]);
 
+  if (isLoading)
+    return (
+      <div className="text-center text-white font-bold text-2xl w-full h-full align-middle">
+        Loading...
+      </div>
+    );
   return (
     <>
       <div>
-        <button
-          onClick={() => navigate("/")}
-          className="bg-white flex flex-row gap-2 items-center text-black border-black border-2 hover:bg-black hover:text-white w-25 h-15 rounded-md mt-7 ml-7 p-3 font-bold"
-        >
-          <span className="text-2xl font-mono">&lt;</span> Home Page
-        </button>
+        <PokemonListPageButton type="Home" onClick={() => navigate("/")} />
       </div>
       <div className="grid grid-flow-row grid-cols-4 gap-5 p-5">
         {pokemonList.map((pokemon) => {
           return (
             <div className="col-span-1" key={pokemon.name}>
-              <PokemonCard
+              <PokemonListPageCard
                 imageURL={pokemon.imageURL}
-                name={pokemon.name}
+                name={pokemon!.name}
                 elements={pokemon.elements}
                 stats={pokemon.stats}
               />

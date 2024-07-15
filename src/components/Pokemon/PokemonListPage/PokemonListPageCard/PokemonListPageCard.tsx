@@ -1,5 +1,6 @@
-import { ToPascalCase } from "../../../helpers/functions";
-import { type_style } from "../../../helpers/styles";
+import { useNavigate } from "react-router-dom";
+import { ToPascalCase } from "../../../../helpers/functions";
+import { type_style } from "../../../../helpers/styles";
 
 type PokemonStats = {
   hp: number;
@@ -17,12 +18,14 @@ type PokemonCardProps = {
   stats: PokemonStats;
 };
 
-export default function PokemonCard({
+export default function PokemonListPageCard({
   imageURL,
   name,
   elements,
   stats,
 }: PokemonCardProps) {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* Card Container */}
@@ -89,6 +92,12 @@ export default function PokemonCard({
               </div>
             </div>
           </div>
+        </div>
+        {/* Link to Pokemon Details */}
+        <div className="bg-black text-white text-center font-bold py-2 hover:cursor-pointer">
+          <span onClick={() => navigate(`/pokemon/${name}`)}>
+            See More &gt;
+          </span>
         </div>
       </div>
     </>
