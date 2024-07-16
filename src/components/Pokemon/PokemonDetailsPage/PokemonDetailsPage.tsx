@@ -7,7 +7,7 @@ import { PokeAPI_PokemonData } from "../../../types/PokeAPI_DataTypes";
 import { PokemonDetailsPageButton } from "../../../atoms/Buttons";
 import { PokemonImage } from "./PokemonDetails/PokemonImage";
 import { PokemonAbilities } from "./PokemonDetails/PokemonAbilities";
-import { PokemonForms } from "./PokemonDetails/PokemonForms";
+import { PokemonHeightAndWeight } from "./PokemonDetails/PokemonHeightAndWeight";
 
 export const PokemonPage = () => {
   const navigate = useNavigate();
@@ -20,10 +20,11 @@ export const PokemonPage = () => {
   const pokemonDataURL = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
   const fetchPokemonData = async () => {
-    await axios.get(pokemonDataURL).then((res) => {
-      const data: PokeAPI_PokemonData = res.data;
+    await axios.get(pokemonDataURL).then(async (res) => {
+      const data: PokeAPI_PokemonData = await res.data;
       setPokemonData(data);
       setIsLoading(false);
+      console.log(data);
     });
   };
 
@@ -54,19 +55,30 @@ export const PokemonPage = () => {
           </div>
         </div>
         {/* Rest of the page */}
-        <div className="flex flex-row justify-start items-center gap-5">
-          {/* Pokemon Image */}
-          <div className="mt-5 ml-5">
-            <PokemonImage
-              imageURL={pokemonData?.sprites.other.home.front_default as string}
-              exp={pokemonData?.base_experience as number}
+        <div className="flex flex-col justify-start items-start gap-5">
+          <div className="flex flex-row justify-start gap-5 m-5">
+            {/* Pokemon Image */}
+            <span>
+              <PokemonImage
+                exp={pokemonData?.base_experience as number}
+                imageURL={
+                  pokemonData?.sprites.other.home.front_default as string
+                }
+                types={pokemonData?.types as []}
+              />
+            </span>
+            {/* Pokemon Abilities */}
+            <span>
+              <PokemonAbilities abilities={pokemonData?.abilities as []} />
+            </span>
+            {/* Pokemon Forms */}
+            <span></span>
+            {/* Pokemon Height and Weight */}
+            <PokemonHeightAndWeight
+              height={pokemonData?.height as number}
+              weight={pokemonData?.weight as number}
             />
           </div>
-          {/* Pokemon Abilities */}
-          <span>
-            <PokemonAbilities abilities={pokemonData?.abilities as []} />
-          </span>
-          <span>{/* <PokemonForms forms={pokemonData?.forms as []} /> */}</span>
         </div>
       </div>
     </>

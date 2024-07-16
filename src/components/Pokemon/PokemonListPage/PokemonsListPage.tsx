@@ -42,7 +42,7 @@ export default function PokemonListPage() {
     // Get the list of all pokemons, limit per request is 20 by default
     await axios
       .get(currentPageURL, { timeout: 5 * 1000 /* 5 sec timeout */ })
-      .then((res) => {
+      .then(async (res) => {
         const responseData: PokeAPI_ResultPage = res.data;
         // Set the next and previous page URLs
         setNextPageURL(responseData.next as string);
