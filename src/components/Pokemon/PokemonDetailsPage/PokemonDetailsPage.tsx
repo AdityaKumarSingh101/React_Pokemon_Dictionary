@@ -8,6 +8,7 @@ import { PokemonDetailsPageButton } from "../../../atoms/Buttons";
 import { PokemonImage } from "./PokemonDetails/PokemonImage";
 import { PokemonAbilities } from "./PokemonDetails/PokemonAbilities";
 import { PokemonHeightAndWeight } from "./PokemonDetails/PokemonHeightAndWeight";
+import { PokemonStats } from "./PokemonDetails/PokemonStats";
 
 export const PokemonPage = () => {
   const navigate = useNavigate();
@@ -55,8 +56,8 @@ export const PokemonPage = () => {
           </div>
         </div>
         {/* Rest of the page */}
-        <div className="flex flex-col justify-start items-start gap-5">
-          <div className="flex flex-row justify-start gap-5 m-5">
+        <div className="flex flex-col justify-start items-start gap-5 mt-10 ml-10">
+          <div className="flex flex-row justify-start items-start gap-5 m-5">
             {/* Pokemon Image */}
             <span>
               <PokemonImage
@@ -68,16 +69,31 @@ export const PokemonPage = () => {
               />
             </span>
             {/* Pokemon Abilities */}
-            <span>
+            <span className="ml-5">
               <PokemonAbilities abilities={pokemonData?.abilities as []} />
             </span>
             {/* Pokemon Forms */}
             <span></span>
             {/* Pokemon Height and Weight */}
-            <PokemonHeightAndWeight
-              height={pokemonData?.height as number}
-              weight={pokemonData?.weight as number}
-            />
+            <span>
+              <PokemonHeightAndWeight
+                height={pokemonData?.height as number}
+                weight={pokemonData?.weight as number}
+              />
+            </span>
+            {/* Pokemon Stats */}
+            <span className="ml-5">
+              <PokemonStats
+                stats={{
+                  hp: pokemonData?.stats[0].base_stat as number,
+                  atk: pokemonData?.stats[1].base_stat as number,
+                  def: pokemonData?.stats[2].base_stat as number,
+                  spAtk: pokemonData?.stats[3].base_stat as number,
+                  spDef: pokemonData?.stats[4].base_stat as number,
+                  speed: pokemonData?.stats[5].base_stat as number,
+                }}
+              />
+            </span>
           </div>
         </div>
       </div>

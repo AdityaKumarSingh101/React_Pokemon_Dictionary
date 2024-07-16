@@ -64,3 +64,6 @@ export const type_style = (element: string) => {
   const style = `${text} ${bg} rounded-md px-1`;
   return style;
 };
+
+export const PokemonDetailsCardStyle =
+  "m-auto border-black bg-black text-white rounded-md p-5 transition-all hover:scale-125 hover:cursor-default duration-5000 ease-in-out";

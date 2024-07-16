@@ -83,7 +83,7 @@ export default function PokemonListPage() {
                 }
               });
 
-            // Temp pokemon data variable
+            // Temp pokemon data variabl
             const pokemon = {
               imageURL: imageURL,
               name: name,
