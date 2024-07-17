@@ -9,6 +9,8 @@ import { PokemonImage } from "./PokemonDetails/PokemonImage";
 import { PokemonAbilities } from "./PokemonDetails/PokemonAbilities";
 import { PokemonHeightAndWeight } from "./PokemonDetails/PokemonHeightAndWeight";
 import { PokemonStats } from "./PokemonDetails/PokemonStats";
+import { PokemonSpeciesInfo } from "./PokemonDetails/PokemonSpeciesInfo";
+import { PokemonCries } from "./PokemonDetails/PokemonCries";
 
 export const PokemonPage = () => {
   const navigate = useNavigate();
@@ -57,6 +59,7 @@ export const PokemonPage = () => {
         </div>
         {/* Rest of the page */}
         <div className="flex flex-col justify-start items-start gap-5 mt-10 ml-10">
+          {/* Pokemon Image Group Row */}
           <div className="flex flex-row justify-start items-start gap-5 m-5">
             {/* Pokemon Image */}
             <span>
@@ -68,32 +71,47 @@ export const PokemonPage = () => {
                 types={pokemonData?.types as []}
               />
             </span>
-            {/* Pokemon Abilities */}
-            <span className="ml-5">
-              <PokemonAbilities abilities={pokemonData?.abilities as []} />
+            {/* Pokemon Abilities and H&W */}
+            <span className="flex flex-col gap-4">
+              <span>
+                <PokemonAbilities abilities={pokemonData?.abilities as []} />
+              </span>
+              {/* Pokemon Height and Weight */}
+              <span>
+                <PokemonHeightAndWeight
+                  height={pokemonData?.height as number}
+                  weight={pokemonData?.weight as number}
+                />
+              </span>
             </span>
             {/* Pokemon Forms */}
             <span></span>
-            {/* Pokemon Height and Weight */}
-            <span>
-              <PokemonHeightAndWeight
-                height={pokemonData?.height as number}
-                weight={pokemonData?.weight as number}
-              />
+            <span className="flex flex-col gap-4">
+              {/* Pokemon Cries */}
+              <span className="h-full">
+                <PokemonCries
+                  latest={pokemonData?.cries.latest as string}
+                  legacy={pokemonData?.cries.legacy as string}
+                />
+              </span>
+              {/* Pokemon Stats */}
+              <span>
+                <PokemonStats
+                  stats={{
+                    hp: pokemonData?.stats[0].base_stat as number,
+                    atk: pokemonData?.stats[1].base_stat as number,
+                    def: pokemonData?.stats[2].base_stat as number,
+                    spAtk: pokemonData?.stats[3].base_stat as number,
+                    spDef: pokemonData?.stats[4].base_stat as number,
+                    speed: pokemonData?.stats[5].base_stat as number,
+                  }}
+                />
+              </span>
             </span>
-            {/* Pokemon Stats */}
-            <span className="ml-5">
-              <PokemonStats
-                stats={{
-                  hp: pokemonData?.stats[0].base_stat as number,
-                  atk: pokemonData?.stats[1].base_stat as number,
-                  def: pokemonData?.stats[2].base_stat as number,
-                  spAtk: pokemonData?.stats[3].base_stat as number,
-                  spDef: pokemonData?.stats[4].base_stat as number,
-                  speed: pokemonData?.stats[5].base_stat as number,
-                }}
-              />
-            </span>
+          </div>
+          {/* Pokemon Species Info */}
+          <div className="">
+            <PokemonSpeciesInfo InfoURL={pokemonData?.species.url as string} />
           </div>
         </div>
       </div>
