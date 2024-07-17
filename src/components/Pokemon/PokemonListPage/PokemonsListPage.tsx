@@ -4,8 +4,6 @@ import axios from "axios";
 import PokemonListPageCard from "./PokemonListPageCard/PokemonListPageCard";
 import type {
   PokeAPI_InfoPage,
-  PokeAPI_Pokemon_Type,
-  PokeAPI_Pokemon_Stat,
   PokeAPI_ResultPage,
   PokeAPI_PokemonData,
 } from "../../../types/PokeAPI_DataTypes";
@@ -15,17 +13,7 @@ import { PokemonListPageButton } from "../../../atoms/Buttons";
 type PokemonData = {
   imageURL: string;
   name: string;
-  elements: string[];
-  stats: {
-    hp: number;
-    atk: number;
-    def: number;
-    spAtk: number;
-    spDef: number;
-    speed: number;
-  };
 };
-
 export default function PokemonListPage() {
   const navigate = useNavigate();
 
@@ -53,8 +41,6 @@ export default function PokemonListPage() {
           async (result: PokeAPI_InfoPage, index: number) => {
             let imageURL: string = "";
             let name: string = "";
-            let elements: string[] = [];
-            let stats: number[] = [];
 
             // Get the desired data for each pokemon, and store in the temp variables above
             await axios
@@ -66,14 +52,6 @@ export default function PokemonListPage() {
                 imageURL = pokemonInfo.sprites!.front_default as string;
                 // Set the name
                 name = pokemonInfo!.name as string;
-                // Set the elements
-                pokemonInfo.types!.map((type: PokeAPI_Pokemon_Type) =>
-                  elements.push(type.type.name)
-                );
-                // Set the stats
-                pokemonInfo.stats!.map((stat: PokeAPI_Pokemon_Stat) =>
-                  stats.push(stat.base_stat)
-                );
               })
               .catch((error) => {
                 if (error.code === "ECONNABORTED") {
@@ -87,15 +65,6 @@ export default function PokemonListPage() {
             const pokemon = {
               imageURL: imageURL,
               name: name,
-              elements: elements,
-              stats: {
-                hp: stats[0],
-                atk: stats[1],
-                def: stats[2],
-                spAtk: stats[3],
-                spDef: stats[4],
-                speed: stats[5],
-              },
             };
 
             // Set the list of pokemons
@@ -143,8 +112,6 @@ export default function PokemonListPage() {
               <PokemonListPageCard
                 imageURL={pokemon.imageURL}
                 name={pokemon!.name}
-                elements={pokemon.elements}
-                stats={pokemon.stats}
               />
             </div>
           );
