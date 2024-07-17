@@ -12,25 +12,25 @@ export const PokemonHeightAndWeight = ({
   return (
     <div className={PokemonDetailsCardStyle}>
       <div className="flex flex-col">
-        <div>
+        <span>
           <h3 className="text-center text-xl">
             <b>HEIGHT</b>
             <hr />
           </h3>
-          <div className="text-center font-bold text-xl mt-2">
+          <div className="text-center font-bold text-lg mt-1">
             {height / 10} m
           </div>
-        </div>
+        </span>
         <br />
-        <div>
+        <span>
           <h3 className="text-center text-xl">
             <b>WEIGHT</b>
             <hr />
           </h3>
-          <div className="text-center font-bold text-xl mt-2">
+          <div className="text-center font-bold text-lg mt-2">
             {weight / 10} kg
           </div>
-        </div>
+        </span>
       </div>
     </div>
   );
