@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ToPascalCase } from "../../../helpers/functions";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { PokemonHeightAndWeight } from "./PokemonDetails/PokemonHeightAndWeight"
 import { PokemonStats } from "./PokemonDetails/PokemonStats";
 import { PokemonSpeciesInfo } from "./PokemonDetails/PokemonSpeciesInfo";
 import { PokemonCries } from "./PokemonDetails/PokemonCries";
+import { PokemonMoves } from "./PokemonDetails/PokemonMoves";
 
 export const PokemonPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export const PokemonPage = () => {
 
   const fetchPokemonData = async () => {
     await axios.get(pokemonDataURL).then(async (res) => {
-      const data: PokeAPI_PokemonData = await res.data;
+      const data: PokeAPI_PokemonData = res.data;
       setPokemonData(data);
       setIsLoading(false);
       console.log(data);
@@ -86,6 +87,7 @@ export const PokemonPage = () => {
             </span>
             {/* Pokemon Forms */}
             <span></span>
+            {/* Pokemon Cries and Stats */}
             <span className="flex flex-col gap-4">
               {/* Pokemon Cries */}
               <span className="h-full">
@@ -109,9 +111,18 @@ export const PokemonPage = () => {
               </span>
             </span>
           </div>
-          {/* Pokemon Species Info */}
-          <div className="">
-            <PokemonSpeciesInfo InfoURL={pokemonData?.species.url as string} />
+          {/* Pokemon Species and Moves */}
+          <div className="flex flex-row gap-5">
+            {/* Pokemon Species Info */}
+            <div className="">
+              <PokemonSpeciesInfo
+                InfoURL={pokemonData?.species.url as string}
+              />
+            </div>
+            {/* Pokemon Moves */}
+            <div>
+              <PokemonMoves moves={pokemonData?.moves as []} />
+            </div>
           </div>
         </div>
       </div>
