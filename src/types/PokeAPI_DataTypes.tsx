@@ -277,5 +277,39 @@ export type PokeAPI_Pokemon_FormPage = {
   types: PokeAPI_Pokemon_Type[];
   version_group: PokeAPI_InfoPage;
 };
-
+export type PokeAPI_Pokemon_SpeciesPage = {
+  base_happiness: number;
+  capture_rate: number;
+  color: PokeAPI_InfoPage;
+  egg_groups: PokeAPI_InfoPage[];
+  evolution_chain: {
+    url: string;
+  };
+  evolves_from_species: PokeAPI_InfoPage;
+  form_descriptions: [];
+  forms_switchable: boolean;
+  gender_rate: number;
+  genera: PokeAPI_Pokemon_Genus[];
+  generation: PokeAPI_InfoPage;
+  growth_rate: PokeAPI_InfoPage;
+  habitat: PokeAPI_InfoPage;
+  has_gender_differences: boolean;
+  hatch_counter: number;
+  id: number;
+  is_baby: boolean;
+  is_legendary: boolean;
+  is_mythical: boolean;
+  name: string;
+  names: PokeAPI_Pokemon_Name[];
+  order: number;
+  shape: PokeAPI_InfoPage;
+};
+export type PokeAPI_Pokemon_Name = {
+  name: string;
+  language: PokeAPI_InfoPage;
+};
+export type PokeAPI_Pokemon_Genus = {
+  genus: string;
+  language: PokeAPI_InfoPage;
+};
 //#endregion
