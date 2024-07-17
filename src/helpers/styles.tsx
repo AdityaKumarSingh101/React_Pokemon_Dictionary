@@ -66,4 +66,4 @@ export const type_style = (element: string) => {
 };
 
 export const PokemonDetailsCardStyle =
-  "m-auto border-black bg-black text-white rounded-md p-5 transition-all hover:scale-125 hover:cursor-default duration-5000 ease-in-out";
+  "m-auto border-black border-4 bg-black text-white rounded-md p-5 transition-all hover:scale-110 hover:cursor-default duration-5000 ease-in-out hover:bg-white hover:text-black";
