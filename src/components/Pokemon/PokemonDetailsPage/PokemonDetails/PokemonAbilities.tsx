@@ -9,14 +9,13 @@ export const PokemonAbilities = ({ abilities }: { abilities: [] }) => {
         <h3 className="text-center text-xl">
           <b>ABILITIES</b>
           <hr />
-          <br />
         </h3>
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-2">
           {abilities.map((ability: PokeAPI_Pokemon_Ability) => {
             return (
-              <li key={ability.ability.name}>
+              <span key={ability.ability.name}>
                 <b>{ToPascalCase(ability.ability.name)}</b>
-              </li>
+              </span>
             );
           })}
         </div>
