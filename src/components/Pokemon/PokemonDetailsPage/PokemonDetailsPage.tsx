@@ -49,17 +49,19 @@ export const PokemonPage = () => {
         {/* Page Heading Bar*/}
         <div className="flex flex-row bg-black text-white py-3 justify-start items-center">
           {/* Back To Pokemon List Button */}
-          <PokemonDetailsPageButton
-            type="Back"
-            onClick={() => navigate("/pokemon")}
-          />
+          <span className="ml-5">
+            <PokemonDetailsPageButton
+              type="Back"
+              onClick={() => navigate("/pokemon")}
+            />
+          </span>
           {/* Pokemon Name */}
           <div className="text-center font-bold text-3xl w-full">
             {ToPascalCase(pokemonData?.name as string)}
           </div>
         </div>
         {/* Rest of the page */}
-        <div className="flex flex-col justify-start items-start gap-5 mt-10 ml-10">
+        <div className="flex flex-col justify-start items-start gap-5 m-5">
           {/* Pokemon Image Group Row */}
           <div className="flex flex-row justify-start items-start gap-5 m-5">
             {/* Pokemon Image */}

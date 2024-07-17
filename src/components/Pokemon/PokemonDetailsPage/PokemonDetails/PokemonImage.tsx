@@ -11,17 +11,13 @@ export const PokemonImage = ({
   types: [];
 }) => {
   return (
-    <div className="flex flex-col bg-white p-6 justify-center items-center size-80 border-black border-8 rounded-2xl">
-      {/* Base Experience */}
-      <div className="w-full text-center bg-black text-white rounded-lg mt-24 font-bold text-lg">
-        Base Experience: {exp}
-      </div>
+    <div className="flex flex-col bg-white justify-center size-80 border-black border-8 rounded-2xl">
       {/* Pokemon Image */}
       <div>
         <img src={imageURL} />
       </div>
       {/* Pokemon Types */}
-      <div className="bg-black text-white rounded-lg font-bold p-3 mb-20 w-full">
+      <div className="bg-black text-white font-bold p-3 ">
         <span className="text-center flex flex-row gap-2 justify-evenly">
           {types.map((type: PokeAPI_Pokemon_Type, index: number) => {
             const style = type_style(type.type.name);
@@ -32,6 +28,10 @@ export const PokemonImage = ({
             );
           })}
         </span>
+      </div>
+      {/* Base Experience */}
+      <div className="text-center bg-black text-white rounded-b-lg font-bold text-lg mb-16 pb-2">
+        Base Experience: {exp}
       </div>
     </div>
   );

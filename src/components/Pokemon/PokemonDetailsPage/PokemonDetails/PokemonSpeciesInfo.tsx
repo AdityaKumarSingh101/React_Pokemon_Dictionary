@@ -24,43 +24,31 @@ export const PokemonSpeciesInfo = ({ InfoURL }: { InfoURL: string }) => {
         {/* Happiness, Capture Rate, Hatch Counter, Gender Rate, Growth Rate */}
         <div className="flex flex-col">
           {/* Happiness */}
-          <li>Happiness: {speciesInfo?.base_happiness}</li>
+          <li>Happiness : {speciesInfo?.base_happiness}</li>
           {/* Capture Rate */}
-          <li>Capture Rate: {speciesInfo?.capture_rate}</li>
+          <li>Capture Rate : {speciesInfo?.capture_rate}</li>
           {/* Hatch Counter */}
-          <li>Hatch Counter: {speciesInfo?.hatch_counter}</li>
+          <li>Hatch Counter : {speciesInfo?.hatch_counter}</li>
           {/* Gender Rate */}
-          <li>Gender Rate: {speciesInfo?.gender_rate}</li>
+          <li>Gender Rate : {speciesInfo?.gender_rate}</li>
           {/* Growth Rate */}
           <li>
-            Growth Rate:{" "}
+            Growth Rate :{" "}
             {`${speciesInfo?.growth_rate.name
-              .split("-")[0]
               .charAt(0)
-              .toUpperCase()}${speciesInfo?.growth_rate.name
-              .split("-")[0]
-              .slice(1)} 
-              
-              ${speciesInfo?.growth_rate.name
-                .split("-")[1]
-                .charAt(0)
-                .toUpperCase()}${speciesInfo?.growth_rate.name
-              .split("-")[1]
-              .slice(1)}`}
+              .toUpperCase()}${speciesInfo?.growth_rate.name.slice(1)}`}
           </li>
         </div>
         {/* Baby, Legendary, Mythical, Form Switchable, Color */}
         <div className="flex flex-col">
           {/* Baby */}
-          <li>Baby: {speciesInfo?.is_baby ? "Yes" : "No"}</li>
+          <li>Baby : {speciesInfo?.is_baby ? "Yes" : "No"}</li>
           {/* Legendary */}
-          <li>Legendary: {speciesInfo?.is_legendary ? "Yes" : "No"}</li>
+          <li>Legendary : {speciesInfo?.is_legendary ? "Yes" : "No"}</li>
           {/* Mythical */}
-          <li>Mythical: {speciesInfo?.is_mythical ? "Yes" : " No"}</li>
+          <li>Mythical : {speciesInfo?.is_mythical ? "Yes" : " No"}</li>
           {/* Form Switchable */}
-          <li>
-            Form Switchable: {speciesInfo?.forms_switchable ? "Yes" : " No"}
-          </li>
+          <li>Form Switch : {speciesInfo?.forms_switchable ? "Yes" : " No"}</li>
           {/* Color */}
           <li>
             Color:{" "}
@@ -72,24 +60,24 @@ export const PokemonSpeciesInfo = ({ InfoURL }: { InfoURL: string }) => {
         {/* Genus, Generation, Shape, Egg Groups, Habitat */}
         <div className="flex flex-col">
           {/* Genus */}
-          <li>Genus: {speciesInfo?.genera[7].genus}</li>
+          <li>Genus : {speciesInfo?.genera[7].genus}</li>
           {/* Generation */}
           <li>
-            Generation:{" "}
+            Generation :{" "}
             {speciesInfo?.generation.name.slice(0, 3).toUpperCase() +
               " " +
               speciesInfo?.generation.name.slice(11).toUpperCase()}
           </li>
           {/* Shape */}
           <li>
-            Shape:{" "}
+            Shape :{" "}
             {`${speciesInfo?.shape.name
               .charAt(0)
               .toUpperCase()}${speciesInfo?.shape.name.slice(1)}`}
           </li>
           {/* Egg Groups */}
           <li>
-            Egg Groups:{" "}
+            Egg Groups :{" "}
             {speciesInfo?.egg_groups.map((group) => {
               return (
                 <span key={group.name}>
@@ -102,7 +90,7 @@ export const PokemonSpeciesInfo = ({ InfoURL }: { InfoURL: string }) => {
           </li>
           {/* Habitat */}
           <li>
-            Habitat:{" "}
+            Habitat :{" "}
             {speciesInfo?.habitat.name.charAt(0).toUpperCase() +
               "" +
               speciesInfo?.habitat.name.slice(1)}
