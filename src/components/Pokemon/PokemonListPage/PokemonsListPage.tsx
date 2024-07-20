@@ -74,7 +74,6 @@ export default function PokemonListPage() {
 
             // Set the list of pokemons
             setPokemonList([...pokemonList, (pokemonList[index] = pokemon)]);
-            setIsLoading(false);
           }
         );
       })
@@ -89,6 +88,7 @@ export default function PokemonListPage() {
 
   useEffect(() => {
     fetchPokemonData();
+    setIsLoading(false);
   }, [currentPageURL]);
 
   if (isLoading)

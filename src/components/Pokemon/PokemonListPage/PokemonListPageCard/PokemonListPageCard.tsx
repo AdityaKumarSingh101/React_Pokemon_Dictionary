@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { ToPascalCase } from "../../../../helpers/functions";
-import { type_style } from "../../../../helpers/styles";
 
 type PokemonCardProps = {
   imageURL: string;
@@ -16,7 +15,7 @@ export default function PokemonListPageCard({
   return (
     <>
       {/* Card Container */}
-      <div className="border-black border-8 rounded-md overflow-auto hover:scale-110 hover:cursor-pointer duration-500 ease-in-out">
+      <div className="border-black border-8 rounded-md overflow-auto hover:scale-110 hover:cursor-pointer duration-500 ease-in-out hover:border-white hover:border-4">
         {/* Name Container */}
         <div className="bg-black p-3 w-full text-white text-center">
           <span className="">
