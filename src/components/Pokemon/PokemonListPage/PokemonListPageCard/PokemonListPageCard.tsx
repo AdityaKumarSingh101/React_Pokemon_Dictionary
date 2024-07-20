@@ -25,7 +25,11 @@ export default function PokemonListPageCard({
         </div>
         {/* Pokemon Image Container */}
         <div className="flex flex-row justify-center bg-white">
-          <img src={imageURL}></img>
+          <img
+            height={100}
+            width={100}
+            src={imageURL ? imageURL : "/Poké_Ball_favicon.png"}
+          ></img>
         </div>
 
         {/* Link to Pokemon Details */}
