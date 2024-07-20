@@ -1,34 +1,33 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import PokemonListPageCard from "./PokemonListPageCard/PokemonListPageCard";
-import { fetchPokemonList } from "../../../api/pokemon/fetchPokemonList";
+import { fetchItemsList } from "../../../api/items/fetchItemList";
+
 import { BackToHomePageButton } from "../../../atoms/Buttons";
 import ListPagePagination from "../../Pagination/ListPagePagination";
+import ItemsListPageCard from "./ItemsListPageCard/ItemsListPageCard";
 
-export default function PokemonListPage() {
+export default function ItemsListPage() {
   const navigate = useNavigate();
+  const [itemsList, setItemsList] = useState<string[]>([]);
+  const [itemsCount, setItemsCount] = useState<number>(0);
+  const [itemsPerPage] = useState(20);
 
   const [currentPageURL, setCurrentPageURL] = useState<string>(
-    "https://pokeapi.co/api/v2/pokemon"
+    "https://pokeapi.co/api/v2/item"
   );
   const [nextPageURL, setNextPageURL] = useState<string>("");
-  const [prevPageURL, setPrevPageURL] = useState<string>("");
-
-  const [pokemonCount, setPokemonCount] = useState<number>(0);
-  const [pokemonPerPage] = useState<number>(20);
-
-  const [pokemonList, setPokemonList] = useState<string[]>([]);
+  const [previousPageURL, setPreviousPageURL] = useState<string>("");
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetchPokemonList(
+    fetchItemsList(
       currentPageURL,
       setNextPageURL,
-      setPrevPageURL,
-      setPokemonCount,
-      setPokemonList
+      setPreviousPageURL,
+      setItemsCount,
+      setItemsList
     );
     setIsLoading(false);
   }, [currentPageURL]);
@@ -45,23 +44,23 @@ export default function PokemonListPage() {
         <BackToHomePageButton text="Home" onClick={() => navigate("/")} />
       </div>
       <div className="grid grid-flow-row grid-cols-4 gap-5 p-5">
-        {pokemonList.map((name) => {
+        {itemsList.map((name) => {
           return (
             <div className="col-span-1" key={name}>
-              <PokemonListPageCard name={name} />
+              <ItemsListPageCard name={name} />
             </div>
           );
         })}
       </div>
 
-      <div className="mt-5 text-center">
+      <div className="my-2 text-center">
         <ListPagePagination
-          dataItem="pokemon"
-          itemCount={pokemonCount}
-          itemsPerPage={pokemonPerPage}
-          previousPageURL={prevPageURL}
+          dataItem="item"
+          itemCount={itemsCount}
+          itemsPerPage={itemsPerPage}
+          previousPageURL={previousPageURL}
           nextPageURL={nextPageURL}
-          gotoPreviousPage={() => setCurrentPageURL(prevPageURL)}
+          gotoPreviousPage={() => setCurrentPageURL(previousPageURL)}
           gotoPageNumber={setCurrentPageURL}
           gotoNextPage={() => setCurrentPageURL(nextPageURL)}
         />
