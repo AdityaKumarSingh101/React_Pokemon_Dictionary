@@ -1,43 +1,37 @@
 import { useNavigate } from "react-router-dom";
-import { ToPascalCase } from "../../../../helpers/functions";
+import { useEffect, useState } from "react";
+import { PokeAPI_PokemonData } from "../../../../types/PokeAPI_DataTypes";
+import { fetchPokemonData } from "../../../../api/pokemon/fetchPokemonData";
+import ListPageCard from "../../../../atoms/ListPageCard";
 
 type PokemonCardProps = {
-  imageURL: string;
   name: string;
 };
 
-export default function PokemonListPageCard({
-  imageURL,
-  name,
-}: PokemonCardProps) {
+export default function PokemonListPageCard({ name }: PokemonCardProps) {
   const navigate = useNavigate();
 
+  const [pokemonData, setPokemonData] = useState<PokeAPI_PokemonData>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetchPokemonData(name, setPokemonData);
+    setIsLoading(false);
+  }, []);
+  if (isLoading) {
+    return (
+      <div className="border-black border-8 rounded-md overflow-auto hover:scale-110 hover:cursor-pointer duration-500 ease-in-out hover:border-white hover:border-4">
+        Loading...
+      </div>
+    );
+  }
   return (
     <>
-      {/* Card Container */}
-      <div className="border-black border-8 rounded-md overflow-auto hover:scale-110 hover:cursor-pointer duration-500 ease-in-out hover:border-white hover:border-4">
-        {/* Name Container */}
-        <div className="bg-black p-3 w-full text-white text-center">
-          <span className="">
-            <b>{ToPascalCase(name)}</b>
-          </span>
-        </div>
-        {/* Pokemon Image Container */}
-        <div className="flex flex-row justify-center bg-white">
-          <img
-            height={100}
-            width={100}
-            src={imageURL ? imageURL : "/Poké_Ball_favicon.png"}
-          ></img>
-        </div>
-
-        {/* Link to Pokemon Details */}
-        <div className="bg-black text-white text-center font-bold py-2 hover:cursor-pointer">
-          <span onClick={() => navigate(`/pokemon/${name}`)}>
-            See More &gt;
-          </span>
-        </div>
-      </div>
+      <ListPageCard
+        name={name}
+        imageURL={pokemonData?.sprites.front_default as string}
+        onClickNavigate={() => navigate(`/pokemon/${name}`)}
+      />
     </>
   );
 }
