@@ -3,7 +3,7 @@ type ButtonProps = {
   onClick: () => void;
 };
 
-export const PokemonListPageButton = ({ text, onClick }: ButtonProps) => {
+export const BackToHomePageButton = ({ text, onClick }: ButtonProps) => {
   switch (text) {
     case "Home":
       return (
