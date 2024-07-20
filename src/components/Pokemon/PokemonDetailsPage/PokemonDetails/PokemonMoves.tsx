@@ -1,7 +1,7 @@
 import { PokemonDetailsCardStyle } from "../../../../helpers/styles";
 import { PokeAPI_Pokemon_Move } from "../../../../types/PokeAPI_DataTypes";
 
-export const PokemonMoves = ({ moves }: { moves: [] }) => {
+export default function PokemonMoves({ moves }: { moves: [] }) {
   return (
     <div className={PokemonDetailsCardStyle}>
       <div className="flex flex-col">
@@ -45,4 +45,4 @@ export const PokemonMoves = ({ moves }: { moves: [] }) => {
       </div>
     </div>
   );
-};
+}

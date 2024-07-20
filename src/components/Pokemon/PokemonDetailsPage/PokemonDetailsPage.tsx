@@ -1,17 +1,19 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { BackToPokemonListButton } from "../../../atoms/Buttons";
 import { ToPascalCase } from "../../../helpers/functions";
-import { useNavigate } from "react-router-dom";
+
 import { PokeAPI_PokemonData } from "../../../types/PokeAPI_DataTypes";
-import { PokemonDetailsPageButton } from "../../../atoms/Buttons";
-import { PokemonImage } from "./PokemonDetails/PokemonImage";
-import { PokemonAbilities } from "./PokemonDetails/PokemonAbilities";
-import { PokemonHeightAndWeight } from "./PokemonDetails/PokemonHeightAndWeight";
-import { PokemonStats } from "./PokemonDetails/PokemonStats";
-import { PokemonSpeciesInfo } from "./PokemonDetails/PokemonSpeciesInfo";
-import { PokemonCries } from "./PokemonDetails/PokemonCries";
-import { PokemonMoves } from "./PokemonDetails/PokemonMoves";
+
+import PokemonImage from "./PokemonDetails/PokemonImage";
+import PokemonAbilities from "./PokemonDetails/PokemonAbilities";
+import PokemonHeightAndWeight from "./PokemonDetails/PokemonHeightAndWeight";
+import PokemonStats from "./PokemonDetails/PokemonStats";
+import PokemonSpeciesInfo from "./PokemonDetails/PokemonSpeciesInfo";
+import PokemonCries from "./PokemonDetails/PokemonCries";
+import PokemonMoves from "./PokemonDetails/PokemonMoves";
 
 export const PokemonPage = () => {
   const navigate = useNavigate();
@@ -50,8 +52,8 @@ export const PokemonPage = () => {
         <div className="flex flex-row bg-black text-white py-3 justify-start items-center">
           {/* Back To Pokemon List Button */}
           <span className="ml-5">
-            <PokemonDetailsPageButton
-              type="Back"
+            <BackToPokemonListButton
+              text="Back"
               onClick={() => navigate("/pokemon")}
             />
           </span>
@@ -87,8 +89,6 @@ export const PokemonPage = () => {
                 />
               </span>
             </span>
-            {/* Pokemon Forms */}
-            <span></span>
             {/* Pokemon Cries and Stats */}
             <span className="flex flex-col gap-4">
               {/* Pokemon Cries */}
@@ -126,6 +126,8 @@ export const PokemonPage = () => {
               <PokemonMoves moves={pokemonData?.moves as []} />
             </div>
           </div>
+          {/* Pokemon Image Galleries */}
+          <div></div>
         </div>
       </div>
     </>

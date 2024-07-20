@@ -1,12 +1,10 @@
 import { PokemonDetailsCardStyle } from "../../../../helpers/styles";
 
-export const PokemonCries = ({
-  latest,
-  legacy,
-}: {
+type PokemonCriesProps = {
   latest: string;
   legacy: string;
-}) => {
+};
+export default function PokemonCries({ latest, legacy }: PokemonCriesProps) {
   return (
     <div className={PokemonDetailsCardStyle}>
       <div className="flex flex-col">
@@ -34,4 +32,4 @@ export const PokemonCries = ({
       </div>
     </div>
   );
-};
+}

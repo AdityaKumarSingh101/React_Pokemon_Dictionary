@@ -2,7 +2,7 @@ import { PokeAPI_Pokemon_Ability } from "../../../../types/PokeAPI_DataTypes";
 import { ToPascalCase } from "../../../../helpers/functions";
 import { PokemonDetailsCardStyle } from "../../../../helpers/styles";
 
-export const PokemonAbilities = ({ abilities }: { abilities: [] }) => {
+export default function PokemonAbilities({ abilities }: { abilities: [] }) {
   return (
     <div className={PokemonDetailsCardStyle}>
       <div className="flex flex-col">
@@ -22,4 +22,4 @@ export const PokemonAbilities = ({ abilities }: { abilities: [] }) => {
       </div>
     </div>
   );
-};
+}

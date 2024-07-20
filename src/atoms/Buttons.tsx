@@ -1,24 +1,24 @@
 type ButtonProps = {
-  type: string;
+  text: string;
   onClick: () => void;
 };
 
-export const PokemonListPageButton = ({ type, onClick }: ButtonProps) => {
-  switch (type) {
+export const PokemonListPageButton = ({ text, onClick }: ButtonProps) => {
+  switch (text) {
     case "Home":
       return (
         <button
           onClick={onClick}
           className="bg-black flex flex-row gap-2 items-center text-white border-white border-4 hover:bg-white hover:text-black w-25 h-15 rounded-md mt-7 ml-7 p-3 font-bold"
         >
-          <span className="text-2xl font-mono">&lt;</span> {type}
+          <span className="text-2xl font-mono">&lt;</span> {text}
         </button>
       );
   }
 };
 
-export const PokemonDetailsPageButton = ({ type, onClick }: ButtonProps) => {
-  switch (type) {
+export const BackToPokemonListButton = ({ text, onClick }: ButtonProps) => {
+  switch (text) {
     case "Back":
       return (
         <button
@@ -27,7 +27,7 @@ export const PokemonDetailsPageButton = ({ type, onClick }: ButtonProps) => {
           }
           onClick={onClick}
         >
-          <span className="text-xl font-mono">&lt;</span> {type}
+          <span className="text-xl font-mono">&lt;</span> {text}
         </button>
       );
   }

@@ -3,7 +3,7 @@ import { PokemonDetailsCardStyle } from "../../../../helpers/styles";
 import { PokeAPI_Pokemon_SpeciesPage } from "../../../../types/PokeAPI_DataTypes";
 import axios from "axios";
 
-export const PokemonSpeciesInfo = ({ InfoURL }: { InfoURL: string }) => {
+export default function PokemonSpeciesInfo({ InfoURL }: { InfoURL: string }) {
   const [speciesInfo, setSpeciesInfo] = useState<PokeAPI_Pokemon_SpeciesPage>();
 
   const fetchSpeciesInfo = async () => {
@@ -99,4 +99,4 @@ export const PokemonSpeciesInfo = ({ InfoURL }: { InfoURL: string }) => {
       </div>
     </div>
   );
-};
+}

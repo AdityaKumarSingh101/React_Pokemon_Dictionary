@@ -1,8 +1,6 @@
 import { PokemonDetailsCardStyle } from "../../../../helpers/styles";
 
-export const PokemonStats = ({
-  stats,
-}: {
+type PokemonStatsProps = {
   stats: {
     hp: number;
     atk: number;
@@ -11,7 +9,8 @@ export const PokemonStats = ({
     spDef: number;
     speed: number;
   };
-}) => {
+};
+export default function PokemonStats({ stats }: PokemonStatsProps) {
   return (
     <div className={PokemonDetailsCardStyle}>
       {/* Stats Title */}
@@ -33,4 +32,4 @@ export const PokemonStats = ({
       </div>
     </div>
   );
-};
+}

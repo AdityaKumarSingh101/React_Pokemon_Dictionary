@@ -5,10 +5,10 @@ type PokemonHeightAndWeightProps = {
   weight: number;
 };
 
-export const PokemonHeightAndWeight = ({
+export default function PokemonHeightAndWeight({
   height,
   weight,
-}: PokemonHeightAndWeightProps) => {
+}: PokemonHeightAndWeightProps) {
   return (
     <div className={PokemonDetailsCardStyle}>
       <div className="flex flex-col">
@@ -34,4 +34,4 @@ export const PokemonHeightAndWeight = ({
       </div>
     </div>
   );
-};
+}

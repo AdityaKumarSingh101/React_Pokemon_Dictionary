@@ -1,15 +1,17 @@
 import { type_style } from "../../../../helpers/styles";
 import { ToPascalCase } from "../../../../helpers/functions";
 import { PokeAPI_Pokemon_Type } from "../../../../types/PokeAPI_DataTypes";
-export const PokemonImage = ({
-  exp,
-  imageURL,
-  types,
-}: {
+
+type PokemonImageProps = {
   exp: number;
   imageURL: string;
   types: [];
-}) => {
+};
+export default function PokemonImage({
+  exp,
+  imageURL,
+  types,
+}: PokemonImageProps) {
   return (
     <div className="flex flex-col bg-white justify-center size-80 border-black border-8 rounded-2xl">
       {/* Pokemon Image */}
@@ -35,4 +37,4 @@ export const PokemonImage = ({
       </div>
     </div>
   );
-};
+}
