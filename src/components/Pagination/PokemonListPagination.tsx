@@ -23,9 +23,11 @@ export default function PokemonListPagination({
     pageNumbers.push(i);
   }
   const [activePageNumber, setActivePageNumber] = useState<number>(0);
+  const [sideLength] = useState<number>(2);
 
   return (
     <>
+      {/* Go to Previous Page Button */}
       {previousPageURL && (
         <button
           className="bg-black text-white size-10 font-bold text-2xl pb-1 rounded-md hover:bg-white hover:text-black"
@@ -34,8 +36,26 @@ export default function PokemonListPagination({
           &lt;
         </button>
       )}
-      {pageNumbers.map((number) => {
-        return (
+      {/* Go to first page button */}
+      {activePageNumber > 5 && (
+        <button
+          className="bg-black text-white size-10 font-bold text-2xl pb-1 rounded-md hover:bg-white hover:text-black"
+          onClick={() => {
+            setActivePageNumber(0);
+            gotoPageNumber(
+              `https://pokeapi.co/api/v2/pokemon/?offset=${
+                activePageNumber * 20
+              }&limit=20}`
+            );
+          }}
+        >
+          &lt;&lt;
+        </button>
+      )}
+      {/* Page number list */}
+      {pageNumbers.map((number: number, index: number) => {
+        return activePageNumber > index - sideLength - 1 &&
+          activePageNumber < index + sideLength + 1 ? (
           <button
             onClick={() => {
               gotoPageNumber(
@@ -53,8 +73,27 @@ export default function PokemonListPagination({
           >
             {number + 1}
           </button>
+        ) : (
+          <span className="text-white font-bold">.</span>
         );
       })}
+      {/* Go to last page button */}
+      {activePageNumber < itemCount - 1 && (
+        <button
+          className="bg-black text-white size-10 font-bold text-2xl pb-1 rounded-md hover:bg-white hover:text-black"
+          onClick={() => {
+            setActivePageNumber(pageNumbers.length - 1);
+            gotoPageNumber(
+              `https://pokeapi.co/api/v2/pokemon/?offset=${
+                activePageNumber * 20
+              }&limit=20}`
+            );
+          }}
+        >
+          &gt;&gt;
+        </button>
+      )}
+      {/* Go to Next Page Button */}
       {nextPageURL && (
         <button
           className="bg-black text-white size-10 font-bold text-2xl pb-1 rounded-md hover:bg-white hover:text-black"
