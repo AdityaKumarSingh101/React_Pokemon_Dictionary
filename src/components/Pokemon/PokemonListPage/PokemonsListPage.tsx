@@ -7,8 +7,8 @@ import type {
   PokeAPI_ResultPage,
   PokeAPI_PokemonData,
 } from "../../../types/PokeAPI_DataTypes";
-import { Pagination } from "../../Pagination/Pagination";
 import { PokemonListPageButton } from "../../../atoms/Buttons";
+import PokemonListPagination from "../../Pagination/PokemonListPagination";
 
 type PokemonData = {
   imageURL: string;
@@ -23,7 +23,11 @@ export default function PokemonListPage() {
   const [nextPageURL, setNextPageURL] = useState<string>("");
   const [prevPageURL, setPrevPageURL] = useState<string>("");
 
+  const [pokemonCount, setPokemonCount] = useState<number>(0);
+  const [pokemonPerPage] = useState<number>(20);
+
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchPokemonData = async () => {
@@ -35,6 +39,7 @@ export default function PokemonListPage() {
         // Set the next and previous page URLs
         setNextPageURL(responseData.next as string);
         setPrevPageURL(responseData.previous as string);
+        setPokemonCount(responseData.count);
 
         // Results is an array with names and urls of the fetched pokemons
         responseData.results.map(
@@ -82,14 +87,6 @@ export default function PokemonListPage() {
       });
   };
 
-  const goToNextPage = () => {
-    setCurrentPageURL(nextPageURL);
-  };
-
-  const goToPrevPage = () => {
-    setCurrentPageURL(prevPageURL);
-  };
-
   useEffect(() => {
     fetchPokemonData();
   }, [currentPageURL]);
@@ -103,7 +100,7 @@ export default function PokemonListPage() {
   return (
     <>
       <div>
-        <PokemonListPageButton type="Home" onClick={() => navigate("/")} />
+        <PokemonListPageButton text="Home" onClick={() => navigate("/")} />
       </div>
       <div className="grid grid-flow-row grid-cols-4 gap-5 p-5">
         {pokemonList.map((pokemon) => {
@@ -117,12 +114,16 @@ export default function PokemonListPage() {
           );
         })}
       </div>
-      <div className="flex justify-center items-center py-2">
-        <Pagination
-          gotoNextPage={goToNextPage}
-          gotoPrevPage={goToPrevPage}
-          prevPage={prevPageURL}
-          nextPage={nextPageURL}
+
+      <div className="mt-5 text-center">
+        <PokemonListPagination
+          itemCount={pokemonCount}
+          itemsPerPage={pokemonPerPage}
+          previousPageURL={prevPageURL}
+          nextPageURL={nextPageURL}
+          gotoPreviousPage={() => setCurrentPageURL(prevPageURL)}
+          gotoPageNumber={setCurrentPageURL}
+          gotoNextPage={() => setCurrentPageURL(nextPageURL)}
         />
       </div>
     </>
