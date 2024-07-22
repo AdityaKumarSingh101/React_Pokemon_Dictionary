@@ -1,5 +1,6 @@
 // Contains all the data types used by the web site
 
+//#region PokeAPI Global Types
 export type PokeAPI_InfoPage = {
   url: string;
   name: string;
@@ -10,6 +11,7 @@ export type PokeAPI_ResultPage = {
   next: string;
   results: PokeAPI_InfoPage[];
 };
+//#endregion
 
 //#region PokeAPI Pokemon Data Types
 export type PokeAPI_PokemonData = {
@@ -47,7 +49,7 @@ export type PokeAPI_Pokemon_Form = {
 };
 export type PokeAPI_Pokemon_GameIndex = {
   game_index: number;
-  version: PokeAPI_InfoPage;
+  generation: PokeAPI_InfoPage;
 };
 export type PokeAPI_Pokemon_VersionGroupDetail = {
   level_learned_at: number;
@@ -317,12 +319,13 @@ export type PokeAPI_Pokemon_Genus = {
 
 //#region PokeAPI Item Data Types
 export type PokeAPI_ItemData = {
-  attribute: PokeAPI_InfoPage[];
-  //baby_trigger_for: [];
+  attributes: PokeAPI_InfoPage[];
+  baby_trigger_for: null;
   catergory: PokeAPI_InfoPage;
   cost: number;
   effect_entries: PokeAPI_Item_Effect[];
-  // fling_effect: null;
+  flavour_text_entries: PokeAPI_Item_FTE[];
+  fling_effect: null;
   fling_power: number;
   game_indices: PokeAPI_Pokemon_GameIndex[];
   held_by_pokemon: PokeAPI_Item_HeldByPokemon[];
@@ -336,6 +339,11 @@ export type PokeAPI_ItemData = {
 export type PokeAPI_Item_Effect = {
   effect: string;
   short_effect: string;
+};
+export type PokeAPI_Item_FTE = {
+  language: PokeAPI_InfoPage;
+  text: string;
+  version_group: PokeAPI_InfoPage;
 };
 export type PokeAPI_Item_GameIndex = {
   game_index: number;
