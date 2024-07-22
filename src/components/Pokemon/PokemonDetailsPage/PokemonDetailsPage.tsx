@@ -15,7 +15,7 @@ import PokemonSpeciesInfo from "./PokemonDetails/PokemonSpeciesInfo";
 import PokemonCries from "./PokemonDetails/PokemonCries";
 import PokemonMoves from "./PokemonDetails/PokemonMoves";
 
-export const PokemonPage = () => {
+export default function PokemonDetailsPage() {
   const navigate = useNavigate();
   const { pokemonName } = useParams();
 
@@ -30,7 +30,6 @@ export const PokemonPage = () => {
       const data: PokeAPI_PokemonData = res.data;
       setPokemonData(data);
       setIsLoading(false);
-      console.log(data);
     });
   };
 
@@ -132,4 +131,4 @@ export const PokemonPage = () => {
       </div>
     </>
   );
-};
+}
