@@ -14,16 +14,16 @@ export default function ItemsListPageCard({ name }: ItemCardProps) {
   const [itemData, setItemData] = useState<PokeAPI_ItemData>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const fetchitem = async () => {
+  const fetchItemList = async () => {
     await axios.get(`https://pokeapi.co/api/v2/item/${name}`).then((res) => {
       const item: PokeAPI_ItemData = res.data;
       setItemData(item);
+      setIsLoading(false);
     });
   };
 
   useEffect(() => {
-    fetchitem();
-    setIsLoading(false);
+    fetchItemList();
   }, []);
   if (isLoading) {
     return (
