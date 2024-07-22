@@ -32,3 +32,18 @@ export const BackToPokemonListButton = ({ text, onClick }: ButtonProps) => {
       );
   }
 };
+export const BackToItemListButton = ({ text, onClick }: ButtonProps) => {
+  switch (text) {
+    case "Back":
+      return (
+        <button
+          className={
+            "bg-black text-white border-white border-2 rounded-md px-4 py-2 font-bold hover:bg-white hover:text-black"
+          }
+          onClick={onClick}
+        >
+          <span className="text-xl font-mono">&lt;</span> {text}
+        </button>
+      );
+  }
+};
