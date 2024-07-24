@@ -63,15 +63,12 @@ export default function ItemDetailsPage() {
           <div className="flex flex-row gap-2">
             {/* Image and Category */}
             <div className="flex flex-col">
-              <div className="bg-white border-black border-2 rounded-t-lg">
+              <div className="bg-white border-black border-2 rounded-lg">
                 <img src={itemData?.sprites.default} width={275} height={275} />
-              </div>
-              <div className="bg-black text-white text-center text-lg font-bold p-2 rounded-b-lg">
-                Category:{" "}
               </div>
             </div>
             {/* Fling Power and Cost */}
-            <div className="bg-black text-white text-center font-bold flex flex-col justify-around p-2">
+            <div className="bg-black text-white text-center font-bold flex flex-col justify-around p-2 rounded-lg ease-in-out duration-500 hover:scale-110 hover:bg-white hover:text-black">
               <div className="flex flex-col">
                 <span className="text-2xl">Cost</span>
                 <hr className="mb-3" />
@@ -83,8 +80,8 @@ export default function ItemDetailsPage() {
                 {itemData?.fling_power !== null ? itemData?.fling_power : "N/A"}
               </div>
             </div>
-            {/* Effect and Short Effect */}
-            <div className="bg-black rounded-md p-5 text-white">
+            {/* Effect and Short Effect and Attributes */}
+            <div className="bg-black rounded-md p-5 text-white hover:scale-110 ease-in-out duration-500 hover:bg-white hover:text-black">
               {itemData?.effect_entries.map((entry, index) => {
                 return (
                   <span key={index}>
@@ -92,20 +89,33 @@ export default function ItemDetailsPage() {
                       <b className="text-xl">Effect</b> <br />
                       <i>{entry.effect}</i>
                     </li>
-                    <hr className="my-2" />
-                    <li>
-                      <b className="text-xl">Short Effect</b>
-                      <br /> <i>{entry.short_effect}</i>
-                    </li>
                   </span>
                 );
               })}
+              <hr className="my-2" />
+              <div>
+                <li className="text-xl font-bold">Attributes</li>
+                <div>
+                  {itemData?.attributes.map((attribute, index) => {
+                    return (
+                      <span key={index}>
+                        <b>-&gt;</b>{" "}
+                        {attribute.name.charAt(0).toUpperCase() +
+                          "" +
+                          attribute.name.slice(1)}
+                        <br />
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
+
           {/* */}
           <div className="flex flex-row">
             {/* Game Indices */}
-            <div className="flex flex-col text-white bg-black p-2 rounded-md">
+            <div className="flex flex-col text-white bg-black p-2 rounded-md ease-in-out duration-500 hover:scale-110 hover:bg-white hover:text-black">
               <span className="font-bold text-xl text-center">
                 Game Indices
               </span>
