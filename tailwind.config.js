@@ -23,6 +23,9 @@ export default {
         "type-steel": "#B8B8D0",
         "type-fairy": "#F0B6BC",
       },
+      fontFamily: {
+        chakra: "'Chakra Petch'",
+      },
     },
   },
   plugins: [],
